@@ -14,7 +14,7 @@ from pymatgen.core.structure import Structure
 from pymatgen.core.lattice import Lattice
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.io.cif import CifWriter
-from pyxtal.symmetry import Group
+# from pyxtal.symmetry import Group
 import chemparse
 import numpy as np
 from p_tqdm import p_map

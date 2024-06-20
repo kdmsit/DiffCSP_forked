@@ -21,8 +21,8 @@ from p_tqdm import p_umap
 
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 
-from pyxtal.symmetry import Group
-from pyxtal import pyxtal
+# from pyxtal.symmetry import Group
+# from pyxtal import pyxtal
 
 from pathos.pools import ProcessPool as Pool
 # from multiprocessing import Pool
@@ -132,43 +132,43 @@ def refine_spacegroup(crystal, tol=0.01):
     return crystal, space_group
 
 
-def get_symmetry_info(crystal, tol=0.01):
-    spga = SpacegroupAnalyzer(crystal, symprec=tol)
-    crystal = spga.get_refined_structure()
-    c = pyxtal()
-    try:
-        c.from_seed(crystal, tol=0.01)
-    except:
-        c.from_seed(crystal, tol=0.0001)
-    space_group = c.group.number
-    species = []
-    anchors = []
-    matrices = []
-    coords = []
-    for site in c.atom_sites:
-        specie = site.specie
-        anchor = len(matrices)
-        coord = site.position
-        for syms in site.wp:
-            species.append(specie)
-            matrices.append(syms.affine_matrix)
-            coords.append(syms.operate(coord))
-            anchors.append(anchor)
-    anchors = np.array(anchors)
-    matrices = np.array(matrices)
-    coords = np.array(coords) % 1.
-    sym_info = {
-        'anchors':anchors,
-        'wyckoff_ops':matrices,
-        'spacegroup':space_group
-    }
-    crystal = Structure(
-        lattice=Lattice.from_parameters(*np.array(c.lattice.get_para(degree=True))),
-        species=species,
-        coords=coords,
-        coords_are_cartesian=False,
-    )
-    return crystal, sym_info
+# def get_symmetry_info(crystal, tol=0.01):
+#     spga = SpacegroupAnalyzer(crystal, symprec=tol)
+#     crystal = spga.get_refined_structure()
+#     c = pyxtal()
+#     try:
+#         c.from_seed(crystal, tol=0.01)
+#     except:
+#         c.from_seed(crystal, tol=0.0001)
+#     space_group = c.group.number
+#     species = []
+#     anchors = []
+#     matrices = []
+#     coords = []
+#     for site in c.atom_sites:
+#         specie = site.specie
+#         anchor = len(matrices)
+#         coord = site.position
+#         for syms in site.wp:
+#             species.append(specie)
+#             matrices.append(syms.affine_matrix)
+#             coords.append(syms.operate(coord))
+#             anchors.append(anchor)
+#     anchors = np.array(anchors)
+#     matrices = np.array(matrices)
+#     coords = np.array(coords) % 1.
+#     sym_info = {
+#         'anchors':anchors,
+#         'wyckoff_ops':matrices,
+#         'spacegroup':space_group
+#     }
+#     crystal = Structure(
+#         lattice=Lattice.from_parameters(*np.array(c.lattice.get_para(degree=True))),
+#         species=species,
+#         coords=coords,
+#         coords_are_cartesian=False,
+#     )
+#     return crystal, sym_info
 
 def build_crystal_graph(crystal, graph_method='crystalnn'):
     """
@@ -1160,8 +1160,11 @@ def process_one(row, niggli, primitive, graph_method, prop_list, use_space_group
         crystal_str, niggli=niggli, primitive=primitive)
     result_dict = {}
     if use_space_group:
-        crystal, sym_info = get_symmetry_info(crystal, tol = tol)
-        result_dict.update(sym_info)
+        # crystal, sym_info = get_symmetry_info(crystal, tol = tol)
+        # result_dict.update(sym_info)
+        sga = SpacegroupAnalyzer(crystal)
+        spacegroup_no = sga.get_space_group_number()
+        result_dict['spacegroup'] = spacegroup_no
     else:
         result_dict['spacegroup'] = 1
     graph_arrays = build_crystal_graph(crystal, graph_method)
