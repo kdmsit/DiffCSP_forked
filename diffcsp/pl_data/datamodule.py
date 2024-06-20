@@ -11,8 +11,8 @@ from omegaconf import DictConfig
 from torch.utils.data import Dataset
 from torch_geometric.data import DataLoader
 
-from diffcsp.common.utils import PROJECT_ROOT
-from diffcsp.common.data_utils import get_scaler_from_data_list
+from common.utils import PROJECT_ROOT
+from common.data_utils import get_scaler_from_data_list
 
 
 def worker_init_fn(id: int):

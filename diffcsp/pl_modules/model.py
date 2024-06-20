@@ -10,8 +10,8 @@ from torch.nn import functional as F
 from torch_scatter import scatter
 from tqdm import tqdm
 
-from diffcsp.common.utils import PROJECT_ROOT
-from diffcsp.common.data_utils import (
+from common.utils import PROJECT_ROOT
+from common.data_utils import (
     EPSILON, cart_to_frac_coords, mard, lengths_angles_to_volume,
     frac_to_cart_coords, min_distance_sqr_pbc)
 MAX_ATOMIC_NUM = 100

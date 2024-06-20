@@ -15,10 +15,10 @@ from smact.screening import pauling_test
 import sys
 sys.path.append('.')
 
-from diffcsp.common.constants import CompScalerMeans, CompScalerStds
-from diffcsp.common.data_utils import StandardScaler, chemical_symbols
-from diffcsp.pl_data.dataset import TensorCrystDataset
-from diffcsp.pl_data.datamodule import worker_init_fn
+from common.constants import CompScalerMeans, CompScalerStds
+from common.data_utils import StandardScaler, chemical_symbols
+from pl_data.dataset import TensorCrystDataset
+from pl_data.datamodule import worker_init_fn
 
 from torch_geometric.data import DataLoader
 
