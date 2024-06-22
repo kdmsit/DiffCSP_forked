@@ -15,7 +15,7 @@ from pymatgen.core.lattice import Lattice
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.io.cif import CifWriter
 # from pyxtal.symmetry import Group
-import chemparse
+# import chemparse
 import numpy as np
 from p_tqdm import p_map
 
@@ -81,8 +81,7 @@ def diffusion(loader, model, step_lr):
     atom_types = []
     lattices = []
     input_data_list = []
-    for idx, batch in enumerate(loader):
-
+    for idx, batch in tqdm(enumerate(loader)):
         if torch.cuda.is_available():
             batch.cuda()
         outputs, traj = model.sample(batch, step_lr = step_lr)

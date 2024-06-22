@@ -78,9 +78,8 @@ def load_data(file_path):
 
 
 def get_model_path(eval_model_name):
-    import diffcsp
-    model_path = (
-        Path(diffcsp.__file__).parent / 'prop_models' / eval_model_name)
+    # import diffcsp
+    model_path = (Path(__file__).parent / 'prop_models' / eval_model_name)
     return model_path
 
 
