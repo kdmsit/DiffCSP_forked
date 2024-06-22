@@ -226,7 +226,7 @@ def get_fp_pdist(fp_array):
 def prop_model_eval(eval_model_name, crystal_array_list):
 
     model_path = get_model_path(eval_model_name)
-
+    print(model_path)
     model, _, _ = load_model(model_path)
     cfg = load_config(model_path)
 
