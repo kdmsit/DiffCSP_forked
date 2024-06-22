@@ -401,8 +401,19 @@ def main(args):
             _, true_crystal_array_list = get_crystal_array_list(
                 recon_file_path)
             gt_crys = p_map(lambda x: Crystal(x), true_crystal_array_list)
-        gen_evaluator = GenEval(
-            gen_crys, gt_crys, eval_model_name=eval_model_name)
+
+        print("Save the Predicted Crystal Structures...")
+        gen_path = os.path.join(args.root_path, 'generated/')
+        print("CSP Generation Path : ", gen_path)
+        if not os.path.exists(gen_path):
+            os.makedirs(gen_path)
+        for i in range(len(gen_crys)):
+            crystal = gen_crys[i]
+            cif_path = os.path.join(gen_path + str(i) + ".cif")
+            crystal.structure.to(filename=cif_path)
+        print("Saved the Predicted Crystal Structures...[DONE]")
+
+        gen_evaluator = GenEval(gen_crys, gt_crys, eval_model_name=eval_model_name)
         gen_metrics = gen_evaluator.get_metrics()
         all_metrics.update(gen_metrics)
 
