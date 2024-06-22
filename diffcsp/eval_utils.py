@@ -110,10 +110,10 @@ def load_model(model_path, load_data=False, testing=True):
                 ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
         hparams = os.path.join(model_path, "hparams.yaml")
         model = model.load_from_checkpoint(ckpt, hparams_file=hparams, strict=False)
-        model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
-        # print(model)
-        # model.lattice_scaler = torch.load(model_path / 'lattice_scaler.pt')
-        # model.scaler = torch.load(model_path / 'prop_scaler.pt')
+
+        # model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
+        model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-21/carbon_gen/prop_scaler.pt')
+
 
         if load_data:
             datamodule = hydra.utils.instantiate(cfg.data.datamodule, _recursive_=False, scaler_path=model_path)
@@ -236,9 +236,9 @@ def prop_model_eval(eval_model_name, crystal_array_list):
         cfg.data.graph_method, cfg.data.preprocess_workers,
         cfg.data.lattice_scale_method)
 
-    # dataset.scaler = model.scaler.copy()
+    dataset.scaler = model.scaler.copy()
     # model.lattice_scaler = torch.load(model_path / 'lattice_scaler.pt')
-    dataset.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
+    # dataset.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
 
     loader = DataLoader(
         dataset,
