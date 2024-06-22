@@ -52,8 +52,9 @@ class CrystGNN_Supervise(BaseModule):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-
         self.encoder = hydra.utils.instantiate(self.hparams.encoder)
+        self.lattice_scaler = None
+        self.scaler = None
 
     def forward(self, batch) -> Dict[str, torch.Tensor]:
         preds = self.encoder(batch)  # shape (N, 1)
