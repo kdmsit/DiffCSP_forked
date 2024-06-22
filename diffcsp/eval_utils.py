@@ -237,7 +237,7 @@ def prop_model_eval(eval_model_name, crystal_array_list):
 
     # dataset.scaler = model.scaler.copy()
     # model.lattice_scaler = torch.load(model_path / 'lattice_scaler.pt')
-    dataset.scaler = torch.load(model_path / 'prop_scaler.pt')
+    dataset.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
 
     loader = DataLoader(
         dataset,
