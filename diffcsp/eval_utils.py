@@ -106,21 +106,15 @@ def load_model(model_path, load_data=False, testing=True):
                 if 'last' in ck.parts[-1]:
                     ckpt = str(ck)
             if ckpt is None:
-                ckpt_epochs = np.array(
-                    [int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts if 'last' not in ckpt.parts[-1]])
+                ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts if 'last' not in ckpt.parts[-1]])
                 ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
         hparams = os.path.join(model_path, "hparams.yaml")
         model = model.load_from_checkpoint(ckpt, hparams_file=hparams, strict=False)
-        try:
-            model.lattice_scaler = torch.load(model_path / 'lattice_scaler.pt')
-            model.scaler = torch.load(model_path / 'prop_scaler.pt')
-        except:
-            pass
+        model.lattice_scaler = torch.load(model_path / 'lattice_scaler.pt')
+        model.scaler = torch.load(model_path / 'prop_scaler.pt')
 
         if load_data:
-            datamodule = hydra.utils.instantiate(
-                cfg.data.datamodule, _recursive_=False, scaler_path=model_path
-            )
+            datamodule = hydra.utils.instantiate(cfg.data.datamodule, _recursive_=False, scaler_path=model_path)
             if testing:
                 datamodule.setup('test')
                 test_loader = datamodule.test_dataloader()[0]
