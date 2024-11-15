@@ -84,6 +84,10 @@ def run(cfg: DictConfig) -> None:
         _recursive_=False,
     )
 
+    pytorch_total_params = sum(p.numel() for p in model.parameters())
+    print(pytorch_total_params)
+    exit()
+
     # Pass scaler from datamodule to model
     hydra.utils.log.info(f"Passing scaler from datamodule to model <{datamodule.scaler}>")
     if datamodule.scaler is not None:
