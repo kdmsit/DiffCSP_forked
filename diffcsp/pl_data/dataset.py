@@ -41,7 +41,7 @@ class CrystDataset(Dataset):
 
     def preprocess(self, save_path, preprocess_workers, prop):
         if os.path.exists(save_path):
-            self.cached_data = torch.load(save_path)
+            self.cached_data = torch.load(save_path,weights_only=False)
         else:
             cached_data = preprocess(
             self.path,
