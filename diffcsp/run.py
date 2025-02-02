@@ -115,16 +115,16 @@ def run(cfg: DictConfig) -> None:
     trainer = pl.Trainer(default_root_dir=hydra_dir, callbacks=callbacks,
                          deterministic=cfg.train.deterministic,
                          check_val_every_n_epoch=5,
-                         ckpt_path=ckpt,
                          **cfg.train.pl_trainer)
+
 
     log_hyperparameters(trainer=trainer, model=model, cfg=cfg)
 
     hydra.utils.log.info("Starting training!")
-    trainer.fit(model=model, datamodule=datamodule)
+    trainer.fit(model=model, datamodule=datamodule, ckpt_path=ckpt)
 
     hydra.utils.log.info("Starting testing!")
-    trainer.test(datamodule=datamodule)
+    trainer.test(datamodule=datamodule, ckpt_path=ckpt,)
 
 
 @hydra.main(config_path=str(PROJECT_ROOT / "conf"), config_name="default")
