@@ -25,6 +25,7 @@ from common.data_utils import (
 from pl_modules.diff_utils import d_log_p_wrapped_normal
 
 MAX_ATOMIC_NUM=100
+torch.set_float32_matmul_precision('high')
 
 
 class BaseModule(pl.LightningModule):
