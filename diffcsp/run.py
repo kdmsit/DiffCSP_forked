@@ -103,18 +103,18 @@ def run(cfg: DictConfig) -> None:
     (hydra_dir / "hparams.yaml").write_text(yaml_conf)
 
     # Load checkpoint (if exist)
-    ckpts = list(hydra_dir.glob('*.ckpt'))
-    if len(ckpts) > 0:
-        ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts])
-        ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
-        hydra.utils.log.info(f"found checkpoint: {ckpt}")
-    else:
-        ckpt = None
+    # ckpts = list(hydra_dir.glob('*.ckpt'))
+    # if len(ckpts) > 0:
+    #     ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts])
+    #     ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
+    #     hydra.utils.log.info(f"found checkpoint: {ckpt}")
+    # else:
+    #     ckpt = None
           
     hydra.utils.log.info("Instantiating the Trainer")
     trainer = pl.Trainer(default_root_dir=hydra_dir, callbacks=callbacks,
-                         deterministic=cfg.train.deterministic, check_val_every_n_epoch=cfg.logging.val_check_interval,
-                         progress_bar_refresh_rate=cfg.logging.progress_bar_refresh_rate, resume_from_checkpoint=ckpt,
+                         deterministic=cfg.train.deterministic, check_val_every_n_epoch=5,
+                         progress_bar_refresh_rate=1, resume_from_checkpoint=ckpt,
                          **cfg.train.pl_trainer)
 
     log_hyperparameters(trainer=trainer, model=model, cfg=cfg)
