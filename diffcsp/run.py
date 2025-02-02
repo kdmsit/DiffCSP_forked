@@ -102,7 +102,7 @@ def run(cfg: DictConfig) -> None:
     yaml_conf: str = OmegaConf.to_yaml(cfg=cfg)
     (hydra_dir / "hparams.yaml").write_text(yaml_conf)
 
-    Load checkpoint (if exist)
+    # Load checkpoint (if exist)
     ckpts = list(hydra_dir.glob('*.ckpt'))
     if len(ckpts) > 0:
         ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts])
