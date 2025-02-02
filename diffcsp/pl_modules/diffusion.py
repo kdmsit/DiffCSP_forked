@@ -262,7 +262,7 @@ class CSPDiffusion(BaseModule):
 
         self.log_dict(
             {'val_loss': loss},
-            log_dict,
+            # log_dict,
             on_step=False,
             on_epoch=True,
             prog_bar=True,
