@@ -40,20 +40,20 @@ class CrystDataset(Dataset):
         self.scaler = None
 
     def preprocess(self, save_path, preprocess_workers, prop):
-        if os.path.exists(save_path):
-            self.cached_data = torch.load(save_path,weights_only=False)
-        else:
-            cached_data = preprocess(
-            self.path,
-            preprocess_workers,
-            niggli=self.niggli,
-            primitive=self.primitive,
-            graph_method=self.graph_method,
-            prop_list=[prop],
-            use_space_group=self.use_space_group,
-            tol=self.tolerance)
-            torch.save(cached_data, save_path)
-            self.cached_data = cached_data
+        # if os.path.exists(save_path):
+        #     self.cached_data = torch.load(save_path,weights_only=False)
+        # else:
+        cached_data = preprocess(
+        self.path,
+        preprocess_workers,
+        niggli=self.niggli,
+        primitive=self.primitive,
+        graph_method=self.graph_method,
+        prop_list=[prop],
+        use_space_group=self.use_space_group,
+        tol=self.tolerance)
+        torch.save(cached_data, save_path)
+        self.cached_data = cached_data
 
     def __len__(self) -> int:
         return len(self.cached_data)
