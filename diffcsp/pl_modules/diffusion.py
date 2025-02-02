@@ -44,7 +44,8 @@ class BaseModule(pl.LightningModule):
         scheduler = hydra.utils.instantiate(
             self.hparams.optim.lr_scheduler, optimizer=opt
         )
-        return {"optimizer": opt, "lr_scheduler": scheduler, "monitor": "val_loss"}
+        return {"optimizer": opt, "lr_scheduler": scheduler, "monitor": "train_loss"}
+        # return {"optimizer": opt, "lr_scheduler": scheduler, "monitor": "val_loss"}
 
 
 ### Model definition
@@ -261,8 +262,7 @@ class CSPDiffusion(BaseModule):
         log_dict, loss = self.compute_stats(output_dict, prefix='val')
 
         self.log_dict(
-            {'val_loss': loss},
-            # log_dict,
+            log_dict,
             on_step=False,
             on_epoch=True,
             prog_bar=True,
