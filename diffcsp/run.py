@@ -102,19 +102,19 @@ def run(cfg: DictConfig) -> None:
     yaml_conf: str = OmegaConf.to_yaml(cfg=cfg)
     (hydra_dir / "hparams.yaml").write_text(yaml_conf)
 
-    # Load checkpoint (if exist)
-    # ckpts = list(hydra_dir.glob('*.ckpt'))
-    # if len(ckpts) > 0:
-    #     ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts])
-    #     ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
-    #     hydra.utils.log.info(f"found checkpoint: {ckpt}")
-    # else:
-    #     ckpt = None
+    Load checkpoint (if exist)
+    ckpts = list(hydra_dir.glob('*.ckpt'))
+    if len(ckpts) > 0:
+        ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts])
+        ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
+        hydra.utils.log.info(f"found checkpoint: {ckpt}")
+    else:
+        ckpt = None
           
     hydra.utils.log.info("Instantiating the Trainer")
     trainer = pl.Trainer(default_root_dir=hydra_dir, callbacks=callbacks,
-                         deterministic=cfg.train.deterministic,
-                         check_val_every_n_epoch=5,**cfg.train.pl_trainer)
+                         deterministic=cfg.train.deterministic, check_val_every_n_epoch=5,resume_from_checkpoint=ckpt,
+                         **cfg.train.pl_trainer)
 
     log_hyperparameters(trainer=trainer, model=model, cfg=cfg)
 
