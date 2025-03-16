@@ -19,7 +19,8 @@ from common.constants import CompScalerMeans, CompScalerStds
 from common.data_utils import StandardScaler, chemical_symbols
 from pl_data.dataset import TensorCrystDataset
 from pl_data.datamodule import worker_init_fn
-from pl_modules.diffusion import CSPDiffusion
+# from pl_modules.diffusion import CSPDiffusion
+from pl_modules.diffusion_w_type import CSPDiffusion
 
 from torch_geometric.data import DataLoader
 
