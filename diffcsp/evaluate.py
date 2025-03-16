@@ -69,8 +69,7 @@ def diffusion(loader, model, num_evals, step_lr = 1e-5):
 def main(args):
     # load_data if do reconstruction.
     model_path = Path(args.model_path)
-    model, test_loader, cfg = load_model(
-        model_path, load_data=True)
+    model, test_loader, cfg = load_model(model_path, load_data=True)
 
     if torch.cuda.is_available():
         model.to('cuda')

@@ -19,6 +19,7 @@ from common.constants import CompScalerMeans, CompScalerStds
 from common.data_utils import StandardScaler, chemical_symbols
 from pl_data.dataset import TensorCrystDataset
 from pl_data.datamodule import worker_init_fn
+from pl_modules.diffusion import CSPDiffusion
 
 from torch_geometric.data import DataLoader
 
@@ -109,7 +110,8 @@ def load_model(model_path, load_data=False, testing=True):
                 ckpt_epochs = np.array([int(ckpt.parts[-1].split('-')[0].split('=')[1]) for ckpt in ckpts if 'last' not in ckpt.parts[-1]])
                 ckpt = str(ckpts[ckpt_epochs.argsort()[-1]])
         hparams = os.path.join(model_path, "hparams.yaml")
-        model = model.load_from_checkpoint(ckpt, hparams_file=hparams, strict=False)
+        model = CSPDiffusion.load_from_checkpoint(ckpt, hparams_file=hparams, strict=False)
+        # model = model.load_from_checkpoint(ckpt, hparams_file=hparams, strict=False)
 
         # model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
         model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-21/carbon_gen/prop_scaler.pt')
