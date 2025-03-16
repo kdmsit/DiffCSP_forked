@@ -243,16 +243,14 @@ class GenEval(object):
         wdist_num_elems = wasserstein_distance(pred_nelems, gt_nelems)
         return {'wdist_num_elems': wdist_num_elems}
 
-    def get_prop_wdist(self):
-        if self.eval_model_name is not None:
-            pred_props = prop_model_eval(self.eval_model_name, [
-                                         c.dict for c in self.valid_samples])
-            gt_props = prop_model_eval(self.eval_model_name, [
-                                       c.dict for c in self.gt_crys])
-            wdist_prop = wasserstein_distance(pred_props, gt_props)
-            return {'wdist_prop': wdist_prop}
-        else:
-            return {'wdist_prop': None}
+    # def get_prop_wdist(self):
+    #     if self.eval_model_name is not None:
+    #         pred_props = prop_model_eval(self.eval_model_name, [c.dict for c in self.valid_samples])
+    #         gt_props = prop_model_eval(self.eval_model_name, [c.dict for c in self.gt_crys])
+    #         wdist_prop = wasserstein_distance(pred_props, gt_props)
+    #         return {'wdist_prop': wdist_prop}
+    #     else:
+    #         return {'wdist_prop': None}
 
     def get_coverage(self):
         cutoff_dict = COV_Cutoffs[self.eval_model_name]
@@ -266,7 +264,7 @@ class GenEval(object):
         metrics = {}
         metrics.update(self.get_validity())
         metrics.update(self.get_density_wdist())
-        metrics.update(self.get_prop_wdist())
+        # metrics.update(self.get_prop_wdist())
         metrics.update(self.get_num_elem_wdist())
         metrics.update(self.get_coverage())
         return metrics
