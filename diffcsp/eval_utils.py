@@ -114,7 +114,12 @@ def load_model(model_path, load_data=False, testing=True):
         # model = model.load_from_checkpoint(ckpt, hparams_file=hparams, strict=False)
 
         # model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-20/perov_gen/prop_scaler.pt')
-        model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-21/carbon_gen/prop_scaler.pt')
+        # model.scaler = torch.load('/home/kishalay/hydra/singlerun/2024-06-21/carbon_gen/prop_scaler.pt')
+        try:
+            model.lattice_scaler = torch.load(model_path / 'lattice_scaler.pt')
+            model.scaler = torch.load(model_path / 'prop_scaler.pt')
+        except:
+            pass
 
 
         if load_data:
