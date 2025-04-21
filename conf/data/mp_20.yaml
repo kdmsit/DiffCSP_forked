@@ -16,7 +16,7 @@ tolerance: 0.1
 
 use_space_group: false
 use_pos_index: false
-train_max_epochs: 1000
+train_max_epochs: 500 #1000
 early_stopping_patience: 100000
 teacher_forcing_max_epoch: 500
 
