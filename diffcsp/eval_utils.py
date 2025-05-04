@@ -47,7 +47,8 @@ recommand_step_lr = {
     'gen':{
         "perov_5": 1e-6,
         "carbon_24": 1e-5,
-        "mp_20": 5e-6
+        "mp_20": 5e-6,
+        "mpts_52": 1e-5
     },
 }
 
