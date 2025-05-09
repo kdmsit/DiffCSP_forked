@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83287fd4-c7bf-4611-a58e-f4ae4c4793a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/model/diffusion_w_type.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/model/diffusion_w_type.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cdvae_kd/run_perov.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../cdvae_kd/run_perov.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../cdvae_kd" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
