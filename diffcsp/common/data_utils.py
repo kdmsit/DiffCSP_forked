@@ -180,8 +180,7 @@ def build_crystal_graph(crystal, graph_method='crystalnn'):
                 crystal, CrystalNN)
         except:
             crystalNN_tmp = local_env.CrystalNN(distance_cutoffs=None, x_diff_weight=-1, porous_adjustment=False, search_cutoff=10)
-            crystal_graph = StructureGraph.with_local_env_strategy(
-                crystal, crystalNN_tmp) 
+            crystal_graph = StructureGraph.with_local_env_strategy(crystal, crystalNN_tmp)
     elif graph_method == 'none':
         pass
     else:

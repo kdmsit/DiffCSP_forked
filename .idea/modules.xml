@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DiffCSP_forked.iml" filepath="$PROJECT_DIR$/.idea/DiffCSP_forked.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cdvae_kd/.idea/cdvae_kd.iml" filepath="$PROJECT_DIR$/../cdvae_kd/.idea/cdvae_kd.iml" />
     </modules>
   </component>
 </project>
